@@ -2,6 +2,7 @@
 //
 
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 struct Shoes {
@@ -19,26 +20,39 @@ void line(int max) {
     cout << endl;
 }
 
-
 int main()
 {
-    struct Shoes shoe;
+    struct Shoes shoe[5];
+    struct Shoes* ptrshoe = shoe;
+    int i;
     
-    cout << "Shoe Order Menu!\n";
-    cout << "\n\t\Please enter Shoe Brand: ";
-    cin >> shoe.brand;
-    cout << "\n\tPlease enter shoe color: ";
-    cin >> shoe.color;
-    cout << "\n\tPlease enter shoe size: ";
-    cin >> shoe.size;
 
+
+    for (i = 0; i < 5; i++) {
+        cout << "Shoe Order Menu!\n";
+        cout << "\n\t\Please enter Shoe Brand: ";
+        cin >> shoe[i].brand;
+        cout << "\n\tPlease enter shoe color: ";
+        cin >> shoe[i].color;
+        cout << "\n\tPlease enter shoe size: ";
+        cin >> shoe[i].size;
+        ptrshoe++;
+    }
+
+
+    ofstream outfile;
+    outfile.open("shoe.txt", ios::out);
+
+    for (i = 0; i < 5; i++) {
+        outfile << shoe[i].brand << " ";
+        outfile << shoe[i].color << " ";
+        outfile << shoe[i].size << " " << endl;
+    }
+
+    outfile.close();
     line(90);
 
-    cout << shoe.brand << endl;
    
-    cout << shoe.color << endl;
-
-    cout << shoe.size << endl;
 }
 
 
